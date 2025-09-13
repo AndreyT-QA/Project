@@ -13,6 +13,8 @@ public class AuthorizationFormPage extends AbsBasePage{
   private final By PASSWORD = By.xpath("//input[@class='form-control' and @type='password']");
   private final By BUTTON_LOGIN = By.xpath("//button[@class='btn btn-primary']");
   private final By ERROR_MSG = By.xpath("//div[@class='fade alert alert-danger show']");
+  private final By WISHLIST = By.xpath("//h2[text()='Мои списки желаний']");
+
 
   public AuthorizationFormPage(WebDriver driver)
   {super(driver, "/login");
@@ -30,7 +32,7 @@ public class AuthorizationFormPage extends AbsBasePage{
 //  boolean isEmpty = $(ERROR_MSG).isEmpty();
 
   public boolean isLoginSuccessful() {
-    return !$(ERROR_MSG).isDisplayed();
+    return $(WISHLIST).isDisplayed();
   }
 
   public void verifyLoginStatus() {

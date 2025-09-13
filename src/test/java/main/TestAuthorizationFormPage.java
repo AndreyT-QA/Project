@@ -7,26 +7,20 @@ import pages.AuthorizationFormPage;
 
 
 public class TestAuthorizationFormPage extends AbsBaseTestSuite{
-  private static final Logger logger = LogManager.getLogger(TestRegisterFormPage.class);
+  private static final Logger logger = LogManager.getLogger(TestAuthorizationFormPage.class);
 
   @Test
   @DisplayName("Авторизация пользователя")
   public void formAuthorization (){
     String userName = "AndreyT";
-    String password = "012345";
+    String password = "0123457";
 
     AuthorizationFormPage mainPage = new AuthorizationFormPage(driver);
     logger.info("Авторизация пользователя");
+    mainPage.open();
     mainPage.fillForm(userName, password);
     mainPage.clickButtonLogin();
+    logger.info("Проверка ");
     mainPage.verifyLoginStatus();
   }
-
-
-
-
-
-
-
-
 }
