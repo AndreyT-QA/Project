@@ -16,11 +16,8 @@ public class TestAuthorizationFormPage extends AbsBaseTestSuite{
     String password = "012345";
 
     AuthorizationFormPage mainPage = new AuthorizationFormPage(driver);
-    logger.info("Авторизация пользователя");
+    logger.info("Авторизация и верификация пользователя");
     mainPage.open();
-    mainPage.fillForm(userName, password);
-    mainPage.clickButtonLogin();
-    logger.info("Проверка успешной авторизации");
-    mainPage.verifyLoginStatus();
+    mainPage.loginAndVerify(userName, password);
   }
 }

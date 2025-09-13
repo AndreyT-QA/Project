@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import waiters.Waiter;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -14,33 +17,27 @@ public class AuthorizationFormPage extends AbsBasePage{
   private final By PASSWORD = By.xpath("//input[@class='form-control' and @type='password']");
   private final By BUTTON_LOGIN = By.xpath("//button[@class='btn btn-primary']");
   private final By ERROR_MSG = By.xpath("//div[@class='fade alert alert-danger show']");
-  private final By WISHLIST = By.xpath("//h2[text()='Мои списки желаний']");
+  //private final By WISHLIST = By.xpath("//h2[text()='Мои списки желаний']");
+  private Waiter waiter;
 
 
   public AuthorizationFormPage(WebDriver driver)
   {super(driver, "/login");
+    this.waiter = new Waiter(driver);
   }
-
-  public void fillForm(String userName, String password) {
+  public void loginAndVerify(String userName, String password) {
     $(USER_NAME).sendKeys(userName);
     $(PASSWORD).sendKeys(password);
-  }
-
-  public void clickButtonLogin() {
     $(BUTTON_LOGIN).click();
+    verifyLoginStatus();
   }
 
   public void verifyLoginStatus() {
+    boolean hasError = waiter.waitForElementPresent(ERROR_MSG);
 
-    try {
-      Thread.sleep(3000);
-    } catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
-    }
-    List<WebElement> errorElements = driver.findElements(ERROR_MSG);
-
-    if (!errorElements.isEmpty() && errorElements.get(0).isDisplayed()) {
-      String errorText = errorElements.get(0).getText();
+    if (hasError)
+      {
+      String errorText = $(ERROR_MSG).getText();
       logger.info("❌ Ошибка входа: " + errorText);
       Assertions.fail("Вход не удался: " + errorText);
     } else {
