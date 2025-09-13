@@ -30,42 +30,22 @@ public class AuthorizationFormPage extends AbsBasePage{
     $(BUTTON_LOGIN).click();
   }
 
-//  boolean isEmpty = $(ERROR_MSG).isEmpty();
-
-//  public boolean isLoginSuccessful() {
-//    return $(WISHLIST).isDisplayed();
-//  }
-
-//  boolean isDisplayed = $(WISHLIST).isDisplayed();
-  //!wishlistElements.isEmpty() && wishlistElements.get(0).isDisplayed()
   public void verifyLoginStatus() {
-    List<WebElement> wishlistElements = driver.findElements(WISHLIST);
-    if (!wishlistElements.isEmpty() && wishlistElements.get(0).isDisplayed())  {
+
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+    List<WebElement> errorElements = driver.findElements(ERROR_MSG);
+
+    if (!errorElements.isEmpty() && errorElements.get(0).isDisplayed()) {
+      String errorText = errorElements.get(0).getText();
+      logger.info("❌ Ошибка входа: " + errorText);
+      Assertions.fail("Вход не удался: " + errorText);
+    } else {
       logger.info("✅ Вход выполнен успешно!");
       Assertions.assertTrue(true, "Вход выполнен успешно");
-    } else {
-      try {
-        String errorText = $(ERROR_MSG).getText();
-        logger.info("❌ Ошибка входа: " + errorText);
-        Assertions.fail("Вход не удался: " + errorText);
-      } catch (NoSuchElementException e) {
-        logger.error("❌ Ошибка входа: неизвестная ошибка");
-        Assertions.fail("Вход не выполнен, ошибка неизвестна");
-      }
-    }
     }
   }
-
-
-
-//  public void verifyLoginStatus() {
-//    if (isLoginSuccessful()) {
-//      logger.info("✅ Вход выполнен успешно!");
-//      Assertions.assertTrue(true, "Вход выполнен успешно");
-//    } else {
-//        String errorText = $(ERROR_MSG).getText();
-//        logger.info("❌ Ошибка входа: " + errorText);
-//        Assertions.fail("Вход не удался: " + errorText);
-//    }
-//  }
-
+  }
