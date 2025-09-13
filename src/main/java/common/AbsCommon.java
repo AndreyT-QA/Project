@@ -15,6 +15,7 @@ import waiters.Waiter;
 import javax.swing.*;
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public abstract class AbsCommon {
 
@@ -34,6 +35,7 @@ public abstract class AbsCommon {
     wait.waitForElementPresent(locator);
     return driver.findElement(locator);
   }
+
 
   protected List<WebElement> $$(By locator) {
     wait.waitForCondition(ExpectedConditions.visibilityOfElementLocated(locator));

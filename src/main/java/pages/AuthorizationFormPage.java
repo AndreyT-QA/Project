@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class AuthorizationFormPage extends AbsBasePage{
 
@@ -31,18 +32,40 @@ public class AuthorizationFormPage extends AbsBasePage{
 
 //  boolean isEmpty = $(ERROR_MSG).isEmpty();
 
-  public boolean isLoginSuccessful() {
-    return $(WISHLIST).isDisplayed();
-  }
+//  public boolean isLoginSuccessful() {
+//    return $(WISHLIST).isDisplayed();
+//  }
 
+//  boolean isDisplayed = $(WISHLIST).isDisplayed();
+  //!wishlistElements.isEmpty() && wishlistElements.get(0).isDisplayed()
   public void verifyLoginStatus() {
-    if (isLoginSuccessful()) {
+    List<WebElement> wishlistElements = driver.findElements(WISHLIST);
+    if (!wishlistElements.isEmpty() && wishlistElements.get(0).isDisplayed())  {
       logger.info("✅ Вход выполнен успешно!");
       Assertions.assertTrue(true, "Вход выполнен успешно");
     } else {
-      String errorText = $(ERROR_MSG).getText();
-      logger.info("❌ Ошибка входа: " + errorText);
-      Assertions.fail("Вход не удался: " + errorText);
+      try {
+        String errorText = $(ERROR_MSG).getText();
+        logger.info("❌ Ошибка входа: " + errorText);
+        Assertions.fail("Вход не удался: " + errorText);
+      } catch (NoSuchElementException e) {
+        logger.error("❌ Ошибка входа: неизвестная ошибка");
+        Assertions.fail("Вход не выполнен, ошибка неизвестна");
+      }
+    }
     }
   }
-}
+
+
+
+//  public void verifyLoginStatus() {
+//    if (isLoginSuccessful()) {
+//      logger.info("✅ Вход выполнен успешно!");
+//      Assertions.assertTrue(true, "Вход выполнен успешно");
+//    } else {
+//        String errorText = $(ERROR_MSG).getText();
+//        logger.info("❌ Ошибка входа: " + errorText);
+//        Assertions.fail("Вход не удался: " + errorText);
+//    }
+//  }
+
