@@ -15,7 +15,7 @@ public class AuthorizationFormPage extends AbsBasePage{
 
   private final By USER_NAME = By.xpath("//input[@class='form-control' and @type='text']");
   private final By PASSWORD = By.xpath("//input[@class='form-control' and @type='password']");
-  private final By BUTTON_LOGIN = By.xpath("//button[@class='btn btn-primary']");
+  private final By BUTTON_LOGIN = By.xpath("//button[@class='btn btn-primary' ]");
   private final By ERROR_MSG = By.xpath("//div[@class='fade alert alert-danger show']");
   //private final By WISHLIST = By.xpath("//h2[text()='Мои списки желаний']");
   private Waiter waiter;
