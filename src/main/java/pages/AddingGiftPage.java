@@ -14,6 +14,9 @@ public class AddingGiftPage extends AbsBasePage{
   private final By IMG_LINK = By.xpath("//label[text()='Ссылка на изображение (необязательно)']/following-sibling::input[@class='form-control' and @type='url']");
   private final By BTN_ADD = By.xpath("//button[@class='btn btn-primary' and @type='submit']");
   private final By NAME_WSHL = By.xpath("//input[@class='form-control' and @type='text']");
+  private final By RESERVE_BTN = By.xpath("//button[@class='btn btn-primary' and @type='button']");
+  private final By REMOVE_RESERVE_BTN = By.xpath("//button[@class='btn btn-warning' and @type='button']");
+
   private Waiter waiter;
 
   public AddingGiftPage (WebDriver driver)
@@ -49,5 +52,12 @@ public class AddingGiftPage extends AbsBasePage{
     logger.info("✅Подарок добавлен успешно");
     return waiter.waitForElementPresent(giftLocator);
   }
-
+  public void reserveGift (){
+    $(RESERVE_BTN).click();
+  }
+  public boolean isReserveGift() {
+    By giftReserved = By.xpath("//div[@class='d-flex gap-2']//small[@class='text-muted d-block mt-2' and text()='Подарок зарезервирован']");
+    logger.info("✅Подарок зарезервирован");
+    return waiter.waitForElementPresent(giftReserved);
+  }
 }
