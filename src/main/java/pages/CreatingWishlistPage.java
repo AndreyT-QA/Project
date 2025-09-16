@@ -26,7 +26,8 @@ public CreatingWishlistPage (WebDriver driver)
   By wishlistLocator = By.xpath("//div[@class='card-title h5' and text()='" + wishlistName + "']");
     return waiter.waitForElementPresent(wishlistLocator);
   }
-
-
+  public AddingGiftPage sendWishlistPage() {
+    return new AddingGiftPage(driver);
+  }
 
 }

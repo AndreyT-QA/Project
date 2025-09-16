@@ -33,7 +33,6 @@ public class AuthorizationFormPage extends AbsBasePage{
   }
 
   public CreatingWishlistPage sendloginPage() {
-    //verifyLoginStatus();
     return new CreatingWishlistPage(driver);
   }
 

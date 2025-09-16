@@ -12,7 +12,7 @@ public class TestCreateWishlist extends AbsBaseTestSuite{
   private static final Logger logger = LogManager.getLogger(TestCreateWishlist.class);
 
   @Test
-  @DisplayName("Создание списка желаний-заполнение всех полей")
+  @DisplayName("Создание списка желаний при заполнении всех полей")
   public void createForm (){
     String wishlistName = "Список желаний";
     String description = "Мой список желаний на какой нибудь праздник";
@@ -31,7 +31,7 @@ public class TestCreateWishlist extends AbsBaseTestSuite{
   }
 
   @Test
-  @DisplayName("Создание списка желаний-заполнение только названия списка")
+  @DisplayName("Создание списка желаний при заполнении только названия списка")
   public void createFormOnlyName (){
     String wishlistName = "Список желаний без описания";
     String description = "";
@@ -45,6 +45,6 @@ public class TestCreateWishlist extends AbsBaseTestSuite{
     createPage.createWishlist(wishlistName, description);
     boolean isCreated = createPage.isWishlistCreate(wishlistName);
     Assertions.assertTrue(isCreated, "Список желаний не был создан");
-    logger.info("Список желаний успешно создан!");
+    logger.info("✅ Список желаний успешно создан!");
   }
 }
