@@ -32,6 +32,11 @@ public class AuthorizationFormPage extends AbsBasePage{
     verifyLoginStatus();
   }
 
+  public CreatingWishlistPage sendloginPage() {
+    //verifyLoginStatus();
+    return new CreatingWishlistPage(driver);
+  }
+
   public void verifyLoginStatus() {
     boolean hasError = waiter.waitForElementPresent(ERROR_MSG);
 
